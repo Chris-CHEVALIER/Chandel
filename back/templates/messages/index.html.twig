@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messagerie{% endblock %}
+
+{% block body %}
+<div style="max-width: 700px; margin: 2rem auto; background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #0002; padding: 2rem;">
+    <h2 style="margin-bottom: 1.5rem;">Vos conversations</h2>
+    <ul style="list-style: none; padding: 0; margin: 0;">
+        {% for conv in conversations %}
+            {% set other = conv.user1 == app.user ? conv.user2 : conv.user1 %}
+            <li style="margin-bottom: 1.2rem;">
+                <a href="{{ path('app_messages_conversation', {'id': conv.id}) }}" style="display: flex; align-items: center; text-decoration: none; color: #222; gap: 1rem; padding: 0.7rem 1rem; border-radius: 8px; transition: background 0.2s; background: #f7f7f7;">
+                    <div>
+                        {% if other.image %}
+                            <img src="{{ asset(other.image) }}" alt="Avatar" style="width: 48px; height: 48px; object-fit: cover; border-radius: 50%;">
+                        {% else %}
+                            <div style="width: 48px; height: 48px; background: #eee; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #aaa;">👤</div>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <div style="font-weight: bold;">{{ other.username }}</div>
+                        <div style="color: #888; font-size: 0.95rem;">@{{ other.pseudo }}</div>
+                    </div>
+                </a>
+            </li>
+        {% else %}
+            <li>Aucune conversation pour le moment.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %} 

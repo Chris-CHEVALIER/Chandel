@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+<div style="max-width: 700px; margin: 2rem auto; background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #0002; overflow: hidden; font-family: 'Segoe UI', sans-serif;">
+    <!-- Banner -->
+    <div style="height: 140px; background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=cover&w=800&q=80') center/cover; position: relative;">
+        <!-- Avatar -->
+        <div style="position: absolute; left: 32px; bottom: -48px; border-radius: 50%; border: 4px solid #fff; width: 96px; height: 96px; background: #fff; display: flex; align-items: center; justify-content: center;">
+            {% if user.image %}
+                <img src="{{ asset(user.image) }}" alt="Avatar" style="width: 88px; height: 88px; object-fit: cover; border-radius: 50%;">
+            {% else %}
+                <div style="width: 88px; height: 88px; background: #eee; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: #aaa;">👤</div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- Profile Main Info -->
+    <div style="padding: 56px 32px 16px 32px; position: relative;">
+        <div style="display: flex; justify-content: space-between; align-items: start;">
+            <div>
+                <h2 style="margin: 0; font-size: 1.7rem;">{{ user.username }}</h2>
+                <div style="color: #888; font-size: 1rem; margin-bottom: 6px;">@{{ user.pseudo }}</div>
+                <div style="color: #444; font-size: 1rem; margin-bottom: 8px;">{{ user.description ? user.description : 'Aucune description.' }}</div>
+                <div style="color: #666; font-size: 0.95rem; margin-bottom: 8px;">
+                    <span style="margin-right: 12px;">Clermont-Ferrand, France</span>
+                    <span style="margin-right: 12px;">🌐 <a href="#" style="color: #0077cc; text-decoration: none;">naelmgn.fr</a></span>
+                    <span>Rejoint Mai 2019</span>
+                </div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <button style="background: #fff; border: 1px solid #ccc; border-radius: 50%; width: 40px; height: 40px; font-size: 1.2rem; cursor: pointer;">✉️</button>
+                <button style="background: #d32d2f; color: #fff; border: none; border-radius: 20px; padding: 0 18px; height: 40px; font-weight: 600; font-size: 1rem; cursor: pointer;">Suivre</button>
+            </div>
+        </div>
+        <!-- Stats -->
+        <div style="margin: 18px 0 0 0; color: #444; font-size: 1rem; display: flex; gap: 24px; align-items: center;">
+            <span><strong>{{ user.nbFollower + 34 }}</strong> Abonnés</span>
+            <span><strong>334</strong> Suivis</span>
+        </div>
+        <div style="margin-top: 8px; color: #888; font-size: 0.95rem;">Suivi par Souhai, Téo, et 9 autres</div>
+    </div>
+    <!-- Tabs -->
+    <div style="display: flex; background: #f6f6f6; border-bottom: 1px solid #eee;">
+        <div style="flex: 1; text-align: center; padding: 12px 0; font-weight: bold; border-bottom: 3px solid #d2b97f; background: #f6f6f6;">Chandels</div>
+        <div style="flex: 1; text-align: center; padding: 12px 0; color: #888; cursor: pointer;">Réponses</div>
+        <div style="flex: 1; text-align: center; padding: 12px 0; color: #888; cursor: pointer;">Médias</div>
+        <div style="flex: 1; text-align: center; padding: 12px 0; color: #888; cursor: pointer;">J'aime(s)</div>
+    </div>
+    <!-- Example Post -->
+    <div style="padding: 24px 32px; border-bottom: 1px solid #eee;">
+        <div style="color: #d2b97f; font-weight: bold; font-size: 0.95rem; margin-bottom: 4px;">Chandel épinglé</div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <div>
+                {% if user.image %}
+                    <img src="{{ asset(user.image) }}" alt="Avatar" style="width: 48px; height: 48px; object-fit: cover; border-radius: 50%;">
+                {% else %}
+                    <div style="width: 48px; height: 48px; background: #eee; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #aaa;">👤</div>
+                {% endif %}
+            </div>
+            <div style="flex: 1;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-weight: bold;">{{ user.username }}</span>
+                    <span style="color: #888;">@{{ user.pseudo }}</span>
+                    <span style="color: #888;">· 14 Jan, 2025</span>
+                </div>
+                <div style="margin: 6px 0 10px 0; color: #222;">Yo les gars, franchement c'est pas pour me la péter mais j'ai réussi à no hit Malenia tout en faisant du saut à la corde et de la ranked sur VALORANT. Je vous laisse vous régaler avec ma VOD sur YouTube et oubliez pas de vous abonner :</div>
+                <div style="margin-bottom: 8px; color: #0077cc;">
+                    Mon exploit en 4k : <a href="https://youtube.com/watch?v=ehwallalajanoihitmalenia" target="_blank">https://youtube.com/watch?v=ehwallalajanoihitmalenia</a>
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <iframe width="100%" height="220" src="https://www.youtube.com/embed/ehwallalajanoihitmalenia" title="YouTube video" frameborder="0" allowfullscreen style="border-radius: 10px;"></iframe>
+                </div>
+                <div style="display: flex; gap: 18px; color: #888; font-size: 1.1rem; align-items: center;">
+                    <span>3 <span style="font-size: 1rem;">💬</span></span>
+                    <span>4 <span style="font-size: 1rem;">🔁</span></span>
+                    <span>26 <span style="font-size: 1rem;">❤</span></span>
+                    <span>89 <span style="font-size: 1rem;">👁</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
