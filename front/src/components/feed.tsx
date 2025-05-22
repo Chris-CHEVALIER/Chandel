@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { VerifiedIcon, CommentIcon, RetweetIcon, LikeIcon, ShareIcon } from './icons';
 import { useTheme } from '@/context/ThemeContext';
 import Link from 'next/link';
+import { create } from 'domain';
 
 const NavTabs = () => {
   const { isDarkMode } = useTheme();
@@ -74,6 +75,7 @@ const Post = ({ author, handle, time, verified, content, image, comments, retwee
   likes: number;
 }) => {
   const { isDarkMode } = useTheme();
+  const [post, setPost] = useState({id: 1, content: "Blabla", createdAt: ""})
 
   useEffect(() => {
   fetch('http://127.0.0.1:8000/post/test/1')
@@ -84,12 +86,14 @@ const Post = ({ author, handle, time, verified, content, image, comments, retwee
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        setPost(data)
       })
       .catch((error) => {
         console.error('Erreur fetch :', error);
       });
   }, []);
+
+  console.log(post);
 
   return (
     <Link href={`/${handle}/status/${Date.now()}`}>
@@ -115,7 +119,7 @@ const Post = ({ author, handle, time, verified, content, image, comments, retwee
               >•••</button>
             </div>
             <div className="mb-3">
-              <p className={isDarkMode ? 'text-white' : ''}>{content}</p>
+              <p className={isDarkMode ? 'text-white' : ''}>{post.content}</p>
             </div>
             {image && (
               <div className="mb-3 rounded-xl overflow-hidden relative h-80">

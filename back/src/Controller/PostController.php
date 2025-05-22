@@ -56,12 +56,12 @@ final class PostController extends AbstractController
     #[Route('/test/{id}/', name: 'test', methods: ['GET'])]
     public function test(Post $post): Response
     {
-        return $this->json([
+        /* return $this->json([
             'id' => $post->getId(),
             'content' => $post->getContent(),
             'createdAt' => $post->getCreatedAt(),
-        ]);
-        // return $this->render("test.html.twig");
+        ]); */
+        return $this->render("test.html.twig");
     }
 
 

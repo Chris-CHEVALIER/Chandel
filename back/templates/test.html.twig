@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<div {{ react_component('Hello', { fullName: 'Chris Chevalier' } ) }}></div>
+	<div>
+		{{ react_component('Hello', { fullName: 'Chris Chevalier' } ) }}
+	</div>
 {% endblock %}
